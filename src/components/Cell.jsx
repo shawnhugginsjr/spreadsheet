@@ -1,6 +1,5 @@
 // eslint-disable-next-line
 import React from 'react'
-import PropTypes from 'prop-types'
 
 /**
  * Cell represents the atomic element of a table
@@ -267,35 +266,3 @@ export default class Cell extends React.Component {
   }
 }
 
-Cell.propTypes = {
-  /**
-   * Function called when the cell changes its value
-   */
-  onChangedValue: PropTypes.func.isRequired,
-
-  /**
-   * Function called when formula recalculation is needed
-   */
-  executeFormula: PropTypes.func.isRequired,
-
-  /**
-   * Function called when a cell is refreshed and requires
-   * an update of the others
-   */
-  updateCells: PropTypes.func.isRequired,
-
-  /**
-   * The x coordinates of this cell
-   */
-  x: PropTypes.number.isRequired,
-
-  /**
-   * The y coordinates of this cell
-   */
-  y: PropTypes.number.isRequired,
-
-  /**
-   * The value of this cell
-   */
-  value: PropTypes.string.isRequired,
-}

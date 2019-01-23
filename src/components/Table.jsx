@@ -1,6 +1,5 @@
 // eslint-disable-next-line
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Parser as FormulaParser } from 'hot-formula-parser'
 import Row from './Row'
 
@@ -166,33 +165,4 @@ export default class Table extends React.Component {
       </table>
     )
   }
-}
-
-Table.propTypes = {
-  /**
-   * The number of columns of the table
-   */
-  x: PropTypes.number.isRequired,
-
-  /**
-   * The number of rows of the table
-   */
-  y: PropTypes.number.isRequired,
-
-  /**
-   * An optional ID for the table, useful to use
-   * multiple tables and store into localStorage
-   */
-  id: PropTypes.string,
-
-  /**
-   * If enabled, saves the table state to the localStorage
-   * Otherwise the table is refreshed on every save
-   */
-  saveToLocalStorage: PropTypes.bool,
-}
-
-Table.defaultProps = {
-  saveToLocalStorage: true,
-  id: 'default',
 }

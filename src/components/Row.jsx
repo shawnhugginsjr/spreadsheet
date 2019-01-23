@@ -1,6 +1,5 @@
 // eslint-disable-next-line
 import React from 'react'
-import PropTypes from 'prop-types'
 import Cell from './Cell'
 
 /**
@@ -27,44 +26,6 @@ const Row = (props) => {
       {cells}
     </tr>
   )
-}
-
-Row.propTypes = {
-  /**
-   * Function called when a cell of the row changes
-   * its value
-   */
-  handleChangedCell: PropTypes.func.isRequired,
-
-  /**
-   * Function called when a cell of the row needs
-   * a formula recalculation
-   */
-  executeFormula: PropTypes.func.isRequired,
-
-  /**
-   * Function called when a cell is refreshed and requires
-   * an update of the others
-   */
-  updateCells: PropTypes.func.isRequired,
-
-  /**
-   * The number of columns of the table, used to know
-   * how many cells to add
-   */
-  x: PropTypes.number.isRequired,
-
-  /**
-   * The identifier value of the row
-   */
-  y: PropTypes.number.isRequired,
-
-  /**
-   * The values of the cells in the row
-   */
-  rowData: PropTypes.shape({
-    string: PropTypes.string,
-  }).isRequired,
 }
 
 export default Row
