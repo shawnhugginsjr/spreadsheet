@@ -137,28 +137,15 @@ export default class Cell extends React.Component {
    * Handle clicking a Cell.
    */
   clicked = () => {
-    // Prevent click and double click to conflict
-    this.timer = setTimeout(() => {
-      if (!this.prevent) {
-        // Unselect all the other cells and set the current
-        // Cell state to `selected`
-        this.emitUnselectAllEvent()
-        this.setState({ selected: true })
-      }
-      this.prevent = false
-    }, this.delay)
+    this.emitUnselectAllEvent()
+    this.setState({ selected: true })
   }
 
   /**
    * Handle doubleclicking a Cell.
    */
-  doubleClicked = () => {
-    // Prevent click and double click to conflict
-    clearTimeout(this.timer)
-    this.prevent = true
-
-    // Unselect all the other cells and set the current
-    // Cell state to `selected` & `editing`
+  doubleClicked = (e) => {
+    e.preventDefault()
     this.emitUnselectAllEvent()
     this.setState({ editing: true, selected: true })
   }
@@ -177,44 +164,12 @@ export default class Cell extends React.Component {
     return value
   }
 
-  /**
-   * Calculates a cell's CSS values
-   */
-  calculateCss = () => {
-    const css = {
-      width: '80px',
-      padding: '4px',
-      margin: '0',
-      height: '25px',
-      boxSizing: 'border-box',
-      position: 'relative',
-      display: 'inline-block',
-      color: 'black',
-      border: '1px solid #cacaca',
-      textAlign: 'left',
-      verticalAlign: 'top', // https://stackoverflow.com/questions/10778949/why-does-adding-text-to-a-span-change-its-position
-      fontSize: '14px',
-      lineHeight: '15px',
-      overflow: 'hidden',
-      fontFamily: 'Calibri, \'Segoe UI\', Thonburi, Arial, Verdana, sans-serif',
-    }
-
-    if (this.props.x === 0 || this.props.y === 0) {
-      css.textAlign = 'center'
-      css.backgroundColor = '#f0f0f0'
-      css.fontWeight = 'bold'
-    }
-
-    return css
-  }
-
   render() {
-    const css = this.calculateCss()
-    const style = this.state.selected || this.state.editing? {'border': '2px solid #1e6337'} : null
+    const style = this.state.selected || this.state.editing ? { 'border': '2px solid #1e6337' } : null
 
     // column 0
     if (this.props.x === 0) {
-      const label = this.props.y === 0? '' : this.props.y
+      const label = this.props.y === 0 ? '' : this.props.y
       return (
         <th>
           <span>
@@ -226,7 +181,7 @@ export default class Cell extends React.Component {
 
     // row 0
     if (this.props.y === 0) {
-      const alpha = ' abcdefghijklmnopqrstuvwxyz'.split('')
+      const alpha = ' ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
       return (
         <th>
           <span onKeyPress={this.onKeyPressOnSpan} role="presentation">
@@ -240,7 +195,6 @@ export default class Cell extends React.Component {
       return (
         <td style={style}>
           <input
-            //style={css}
             type="text"
             onBlur={this.onBlur}
             onKeyPress={this.onKeyPressOnInput}
@@ -256,7 +210,6 @@ export default class Cell extends React.Component {
         <span
           onClick={e => this.clicked(e)}
           onDoubleClick={e => this.doubleClicked(e)}
-          //style={css}
           role="presentation"
         >
           {this.display}
