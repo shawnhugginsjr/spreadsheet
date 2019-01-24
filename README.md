@@ -2,6 +2,8 @@
 
 This repo contains the code powering a simple spreadsheet-like React component.
 
+![](example.gif)
+
 ## How to run the code
 
 Unzip an run
